@@ -20,37 +20,49 @@ Brief Description of Goal of Code:
 Serve as a diagnostic tool to diagnose either a cold or allergy using various yes or no questions. 
  
 Known Issues:
-
+Results page unable to load, script for results function not functional.
 
 https://www.w3schools.com/w3css/default.asp
 https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-file
 -->
 	
-   <head> 
+   <head> <!creates heading>
       <title>Allergy or Cold Diagnostic Tool</title>  <!Title for webpage>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="width=device-width, initial-scale=1"> <!Provides width for various devices>
       <meta name="apple-mobile-web-app-capable" content="yes">
       <link rel="stylesheet" href="w3.css">
       <link rel="stylesheet" href="w3-colors-flat.css">
    </head> 
 
 
-<script>
-        var allergy_count = 0; 
-        var cold_count = 0;
+<script> //begins script
+        var allergy_count = 0; //Holds the variable for amount of times clicked on allergy
+        var cold_count = 0; //Holds the variable for amount of times clicked on cold
 
 
-        function allergyAdd(){
-            allergy_count = allergy_count + 1;
-		alert(allergy_count);
+        function allergyAdd(){ //main function for adding allergy points
+            allergy_count = allergy_count + 1; //adds points to allergy count
+		alert(allergy_count); //creates an alert
 
         }
 
-        function coldAdd(){
-            cold_count = cold_count + 1;
+        function coldAdd(){ //main function for adding cold points
+            cold_count = cold_count + 1; //adds points to cold count
         }
+	
+	 function getResults(){ //function to calculate results
+   if(allergy_count>cold_count){ //runs this command if allergy count is above cold count
+      resultText.innerHTML = "Probability it is allergies =" + ((allergy_count/4)*100) + "<br> Probability it is a cold =" + ((cold_count/4)*100) "; 	
+   } //creates sentence describing probabilty of having allergies or a cold as well as calculating the probabilities using a formula
+   else if(cold_count>allergy_count){ //runs this command if allergy count is below cold count
+      resultText.innerHTML = "Probability it is allergies =" + ((allergy_count/4)*100) + "<br> Probability it is a cold =" + ((cold_count/4)*100) ";	
+   } //creates sentence describing probabilty of having allergies or a cold as well as calculating the probabilities using a formula
+   else if(cold_count = allergy_count){ //runs this command if allergy count is same as cold count
+      resultText.innerHTML = "Equal probability of having a cold and allergy.";
+   } //displays text showing that there is an equal probability of having a cold and allergy
+        }  
 
-  </script>
+  </script> 
 
 
 
@@ -90,7 +102,7 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
  	
 	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p> <!Cautionary label for first page>
 
-<div class="page" id="one">
+<div class="page" id="one"> <!Creates and IDs the page as one>
 	<div id="header" class="w3-container w3-flat-carrot">
 		<h1>Question 1</h1> <!Displays title of page>
 	</div>
@@ -102,7 +114,7 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
     	</div>
 </div>
 
-<div class="page" id="two">
+<div class="page" id="two"> <!Creates and IDs the page as two>
 	<div class="w3-container w3-flat-carrot">
 		<h1>Question 2</h1> <!Displays title on the page>
 	</div>
@@ -114,7 +126,7 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 	</div>
 </div>	
 	
-<div class="page" id="three">
+<div class="page" id="three"> <!Creates and IDs the page as three>
 	<div class="w3-container w3-flat-carrot">
 		<h1>Question 3</h1> <!Displays title on the page>
 	</div>
@@ -126,7 +138,7 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 	</div>
 </div>	
 	
-<div class="page" id="four">
+<div class="page" id="four"> <!Creates and IDs the page as four>
 	<div class="w3-container w3-flat-carrot">
 		<h1>Question 4</h1> <!Displays title on the page>
 	</div>
@@ -138,27 +150,14 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 	</div>
 </div>	
 	
-<div class="page" id="five">
+<div class="page" id="five"> <!Creates and IDs the page as five>
 	<div class="w3-container w3-flat-carrot">
 		<h1>See Results</h1> <!Displays title on the page>
 	</div>
 	
 	<div id="content" class="w3-container">
 		<p>See your results down below!</p> <!Displays question on page>
-		<a href="#six" class="w3-btn w3-black"> results </a> <!Creates button for results>
-	</div>
-</div>
-	
-<div class="page" id="six">
-	<div class="w3-container w3-flat-carrot">		
-			<p id="results">
-			
-			<script>
-			var resultText = document.getElementById("results");
-			resultText.innerHTML = "Probability it is allergies =" + allergyPercent + "<br> Probability it is a cold =" + coldPercent ";	
-			</script>
-			
-		</p>
+		<a href="#five" onclick="getResults();" class="w3-btn w3-black"> results </a> <!Creates button for results as well as run getresults command>
 	</div>
 </div>
 <footer class="w3-bottom w3-container w3-flat-carrot">
